@@ -1,10 +1,8 @@
-
+TEMPLATE = """
 <!DOCTYPE html>
 <html>
 <head>
-    <title>
-
-"The Power of Circumcision of the Heart: Exploring True Salvation Through Repentance and Faith"</title>
+    <title>{title}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style2.css">
@@ -12,29 +10,22 @@
 <body>
     <div class="container">
         <header>
-            <h1>
-
-"The Power of Circumcision of the Heart: Exploring True Salvation Through Repentance and Faith"</h1>
+            <h1>{heading}</h1>
         </header>
 
         <main>
             <div class="row">
                 <div class="col-md-4">
-                    <img src="egg.png" alt="Cover Image" class="img-fluid img-cover" style="max-width: 40%;">
+                    <img src="{image_src}" alt="{image_alt}" class="img-fluid img-cover" style="max-width: 40%;">
                 </div>
                 <div class="col-md-8">
-                    <p><i>"O for a heart to praise God's holy name,
-Courage to suffer reproach, scorn and shame;
-An undivided heart, — sole to adore
-The Lord, who bought me with his precious blood."</i></p>
+                    <p><i>"{quote}"</i></p>
 
-                    <p class="lead">Hymn Title: "O for a Heart to Praise My God"</p>
+                    <p class="lead">Hymn Title: "{hymn_title}"</p>
 
                     <br>
 
-                    <p>
-
-In his sermon Circumcision of the Heart, John Wesley argues that while physical circumcision was used to identify Old Testament Jews as those of Covenant faith, spiritual circumcision – or an inward transformation of the heart through repentance and faith – is the only means of attaining true salvation in the modern age. He draws evidence from the Bible to demonstrate that this "circumcision of the heart" is the only path to salvation, and encourages his listeners to undergo it in order to experience God's grace.</p>
+                    <p>{main_content}</p>
                 </div>
             </div>
         </main>
@@ -42,7 +33,7 @@ In his sermon Circumcision of the Heart, John Wesley argues that while physical 
             <div class="container">
                 <h2>Related Articles</h2>
                 <ul class="list-group list-group-flush">
-                 <li class="list-group-item"><a href="{article_1_url}">{article_1_title}</a></li>
+                <li class="list-group-item"><a href="{article_1_url}">{article_1_title}</a></li>
                 <li class="list-group-item"><a href="{article_2_url}">{article_2_title}</a></li>
                 <li class="list-group-item"><a href="{article_3_url}">{article_3_title}</a></li>
                 </ul>
@@ -55,3 +46,4 @@ In his sermon Circumcision of the Heart, John Wesley argues that while physical 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min"></script>
 </body>
 </html>
+"""
