@@ -1,12 +1,3 @@
-Thanks for sharing these details! I'll create a research-backed plan tailored to your needs. It will focus on:
-
-- Simple, ultra-convenient, and budget-friendly meal options without seafood, fish, turkey, mushrooms, kale, or plums.
-- Psychological strategies based on cognitive science to help you stick with healthier eating without rigid rules.
-- A realistic approach to reducing junk food cravings without forcing a complete elimination.
-- Avoiding diet industry hype and focusing on unbiased, well-supported nutrition research.
-
-I’ll compile this information and get back to you with a structured, easy-to-follow plan.
-
 # Healthy Eating Strategy for a 35-Year-Old Non-Cook with Junk Food Cravings
 
 ## Introduction  
