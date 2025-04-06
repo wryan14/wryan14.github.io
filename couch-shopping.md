@@ -3,7 +3,7 @@
 ## 1. Ashley Austere
 **Model #:** 3840181  
 **Link:** [Ashley Furniture - Austere](https://www.ashleyfurniture.com/p/austere_reclining_sofa/3840181.html)  
-**Image:** ![Austere Sofa Image](blob:https://chatgpt.com/365db429-fef9-4484-811a-a01eaa25a5a8)  
+**Image:** [Austere Sofa Image](blob:https://chatgpt.com/365db429-fef9-4484-811a-a01eaa25a5a8)  
 **Price:** ~$900 (sale) / ~$1,100 (list)  
 **Rating:** 4.5/5 stars  
 **Notes:** _______________________________________
