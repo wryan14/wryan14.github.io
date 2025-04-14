@@ -75,3 +75,50 @@ A simple, searchable system for Pastor Mann's 499 YouTube sermons that will:
 - Consider trying local embedding models if you want to cut API costs
 
 This project is meant to be fun and educational while creating something useful. The design prioritizes simplicity and low maintenance over enterprise-grade features.
+
+flowchart TD
+    subgraph "Data Ingestion Pipeline"
+        A[YouTube Videos] -->|yt-dlp| B[Audio Files]
+        B -->|Whisper API| C[Raw Transcripts]
+        C -->|Text Processing| D[Chunked Text]
+        D -->|OpenAI Embeddings| E[Vector Embeddings]
+    end
+
+    subgraph "Storage Layer"
+        E -->|Store| F[Pinecone Vector DB]
+        C -->|Store| G[S3/GitHub Storage]
+        H[Church Documents] -->|Process & Embed| E
+    end
+
+    subgraph "Query Pipeline"
+        I[User Query] -->|Web Interface| J[API Backend]
+        J -->|Convert to Embedding| K[Query Vector]
+        K -->|Semantic Search| F
+        F -->|Retrieve Relevant Chunks| L[Context Passages]
+        L -->|Prompt Engineering| M[GPT-4o]
+        M -->|Generate Answer| N[Response with Citations]
+    end
+
+    subgraph "Automation"
+        O[New YouTube Upload] -->|Scheduled Check| P[Detection Script]
+        P -->|Process New Content| B
+        P -->|Generate SEO| Q[SEO Suggestions]
+        Q -->|Email| R[Pastor Mann]
+    end
+
+    subgraph "Frontend"
+        N -->|Display| S[Jekyll Website]
+        S -->|User Interface| I
+    end
+
+    classDef ingestion fill:#ffcc99,stroke:#ff9933,stroke-width:2px;
+    classDef storage fill:#99ccff,stroke:#3399ff,stroke-width:2px;
+    classDef query fill:#ccff99,stroke:#99cc33,stroke-width:2px;
+    classDef auto fill:#cc99ff,stroke:#9933ff,stroke-width:2px;
+    classDef frontend fill:#ffff99,stroke:#cccc33,stroke-width:2px;
+
+    class A,B,C,D,E ingestion;
+    class F,G,H storage;
+    class I,J,K,L,M,N query;
+    class O,P,Q,R auto;
+    class S frontend;
