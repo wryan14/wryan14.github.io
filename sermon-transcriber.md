@@ -11,9 +11,45 @@ A simple, searchable system for Pastor Mann's 499 YouTube sermons that will:
 
 ## System Architecture
 
-![Sermon RAG System Architecture](https://mermaid.ink/img/pako:eNqNVMtu2zAQ_BWCJwcwZMdOmrhAeuhRSIE2CBo0EC8HWqRsBNpQJOXWMPTvXVJyHAdtT-JqZ4czs7O73BLFElEiN1eKc0Wp4Mh-kCplFANvsCUl0rJghJY1p6gohfUEvTmCLz8ufl5-j5RqkaB3V4zQaY8Kh3--JNrC_Xxzfd3UcrvjQSk3lzNFPrIEz3g9Y-HVZwgpBzl48M_b8RuExE-FveBxJE4Rl_Mcp33hKMh4Yp_aRbSZo2YOXOW1pMT0xQ2NaQkJSfQ_lCLFFKnltV5YWs3C6g69UGnCiSHkJCx9Oet27AwsB14ZCq9D7ZKp_L80h8VMOI2nfJaswk6FSpxyyK4vchZqw5IFhxDDjM_XkxKzj6ZoRfHkP66xbHFbqOQ-RZ3Vh4tB04c9mxMEGsKoNjWtDNuv7VQ4x7TrTtnkwbhM13Xtk9tnXXG9bnuJIzSqaOHJcIE85hV1vGKpf-iEP0Iui92e8fO_yfI_QSvUxlIWOCJHyMF3LgotGz1AXx9JDj7xrJakk7g7-PCqQU8Whi1BDm6nZBL3aQ6gy04FoNM1nBXVnfOCDEVPD5tQCNsU-_qwuS64dAdbrVCh5fXWI0wK89sEE2eZIyVVuQm3vfM7KPLQJMhx7doSX5Q1ZzZ4oOuMPqTM4Gb2FHlQVhZRKqW7zy_fstfuPLVY8aqh_Jtf02tpLMfxGrfH-Z-Vdoc-fgCVcPa6SrOytgYp6jWNV4lSV2N-xjuKrfUG1YxHZm0tjm1kqxhbpQvF1iYS-2ZtGZtzr7_Wc2zpOJK96fXMcfWP4-of-Gj3iw?type=png)
+For a visual representation of the system architecture, consider using a simple diagram like this:
 
-*System diagram showing the flow from YouTube videos through transcription, storage, and query processing to user interface.*
+```
++-------------------------+           +-------------------------+
+|                         |           |                         |
+|   YouTube Sermons       +---------->+   Audio Extraction      |
+|                         |  yt-dlp   |                         |
++-------------------------+           +-------------------------+
+                                                |
+                                                | Whisper API
+                                                v
++-------------------------+           +-------------------------+
+|                         |           |                         |
+|   Vector Database       +<----------+   Transcription         |
+|   (Pinecone)            |           |   Processing            |
+|                         |           |                         |
++-------------------------+           +-------------------------+
+       ^                                        ^
+       |                                        |
+       |                                        |
+       |                                        |
++------+-----------------------+      +---------+--------------+
+|                              |      |                        |
+|   User Query Processing      |      |   Church Documents     |
+|   (FastAPI Backend)          |      |   & Metadata           |
+|                              |      |                        |
++-------------------------+----+      +------------------------+
+       |                  ^
+       |                  |
+       v                  |
++-------------------------+           +-------------------------+
+|                         |           |                         |
+|   GPT-4o                +---------->+   Response with         |
+|   Answer Generation     |           |   Citations & Links     |
+|                         |           |                         |
++-------------------------+           +-------------------------+
+```
+
+*A simplified diagram showing how sermon content flows from YouTube through transcription and into a searchable database that users can query.*
 
 ## Tech Stack
 
