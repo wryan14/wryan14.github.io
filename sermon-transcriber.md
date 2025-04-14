@@ -1,4 +1,4 @@
-# Pastor Mann's Sermon RAG System: Simple Design & Cost
+# Sermon RAG System: Simple Design & Cost
 
 ## What We're Building
 
