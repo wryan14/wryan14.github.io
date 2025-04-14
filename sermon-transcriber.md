@@ -11,7 +11,6 @@ A simple, searchable system for Pastor Mann's 499 YouTube sermons that will:
 
 ## System Architecture
 
-For a visual representation of the system architecture, consider using a simple diagram like this:
 
 ```
 +-------------------------+           +-------------------------+
