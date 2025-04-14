@@ -35,7 +35,7 @@ A simple, searchable system for Pastor Mann's 499 YouTube sermons that will:
 - Simple search box on a Jekyll site (GitHub Pages)
 - User asks a question
 - System finds relevant sermon sections
-- GPT-3.5 generates an answer with timestamps/links
+- GPT-4o generates an answer with timestamps/links
 
 **Step 4: Automation**
 - Script checks for new uploads weekly
@@ -52,7 +52,7 @@ A simple, searchable system for Pastor Mann's 499 YouTube sermons that will:
 **Monthly Costs:**
 - Transcribe new videos (12/month): ~$3.24
 - Server hosting: ~$7 (or less with free tiers)
-- GPT-3.5 usage: ~$3
+- GPT-4o usage: ~$10 (Depends on usage)
 - Storage: ~$1
 
 **Total Estimates:**
