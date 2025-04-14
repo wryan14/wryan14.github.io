@@ -9,6 +9,12 @@ A simple, searchable system for Pastor Mann's 499 YouTube sermons that will:
 - Improve YouTube SEO with better titles, descriptions, and tags
 - Automatically process new sermon uploads
 
+## System Architecture
+
+![Sermon RAG System Architecture](https://mermaid.ink/img/pako:eNqNVMtu2zAQ_BWCJwcwZMdOmrhAeuhRSIE2CBo0EC8HWqRsBNpQJOXWMPTvXVJyHAdtT-JqZ4czs7O73BLFElEiN1eKc0Wp4Mh-kCplFANvsCUl0rJghJY1p6gohfUEvTmCLz8ufl5-j5RqkaB3V4zQaY8Kh3--JNrC_Xxzfd3UcrvjQSk3lzNFPrIEz3g9Y-HVZwgpBzl48M_b8RuExE-FveBxJE4Rl_Mcp33hKMh4Yp_aRbSZo2YOXOW1pMT0xQ2NaQkJSfQ_lCLFFKnltV5YWs3C6g69UGnCiSHkJCx9Oet27AwsB14ZCq9D7ZKp_L80h8VMOI2nfJaswk6FSpxyyK4vchZqw5IFhxDDjM_XkxKzj6ZoRfHkP66xbHFbqOQ-RZ3Vh4tB04c9mxMEGsKoNjWtDNuv7VQ4x7TrTtnkwbhM13Xtk9tnXXG9bnuJIzSqaOHJcIE85hV1vGKpf-iEP0Iui92e8fO_yfI_QSvUxlIWOCJHyMF3LgotGz1AXx9JDj7xrJakk7g7-PCqQU8Whi1BDm6nZBL3aQ6gy04FoNM1nBXVnfOCDEVPD5tQCNsU-_qwuS64dAdbrVCh5fXWI0wK89sEE2eZIyVVuQm3vfM7KPLQJMhx7doSX5Q1ZzZ4oOuMPqTM4Gb2FHlQVhZRKqW7zy_fstfuPLVY8aqh_Jtf02tpLMfxGrfH-Z-Vdoc-fgCVcPa6SrOytgYp6jWNV4lSV2N-xjuKrfUG1YxHZm0tjm1kqxhbpQvF1iYS-2ZtGZtzr7_Wc2zpOJK96fXMcfWP4-of-Gj3iw?type=png)
+
+*System diagram showing the flow from YouTube videos through transcription, storage, and query processing to user interface.*
+
 ## Tech Stack
 
 **Core Components:**
@@ -75,50 +81,3 @@ A simple, searchable system for Pastor Mann's 499 YouTube sermons that will:
 - Consider trying local embedding models if you want to cut API costs
 
 This project is meant to be fun and educational while creating something useful. The design prioritizes simplicity and low maintenance over enterprise-grade features.
-
-flowchart TD
-    subgraph "Data Ingestion Pipeline"
-        A[YouTube Videos] -->|yt-dlp| B[Audio Files]
-        B -->|Whisper API| C[Raw Transcripts]
-        C -->|Text Processing| D[Chunked Text]
-        D -->|OpenAI Embeddings| E[Vector Embeddings]
-    end
-
-    subgraph "Storage Layer"
-        E -->|Store| F[Pinecone Vector DB]
-        C -->|Store| G[S3/GitHub Storage]
-        H[Church Documents] -->|Process & Embed| E
-    end
-
-    subgraph "Query Pipeline"
-        I[User Query] -->|Web Interface| J[API Backend]
-        J -->|Convert to Embedding| K[Query Vector]
-        K -->|Semantic Search| F
-        F -->|Retrieve Relevant Chunks| L[Context Passages]
-        L -->|Prompt Engineering| M[GPT-4o]
-        M -->|Generate Answer| N[Response with Citations]
-    end
-
-    subgraph "Automation"
-        O[New YouTube Upload] -->|Scheduled Check| P[Detection Script]
-        P -->|Process New Content| B
-        P -->|Generate SEO| Q[SEO Suggestions]
-        Q -->|Email| R[Pastor Mann]
-    end
-
-    subgraph "Frontend"
-        N -->|Display| S[Jekyll Website]
-        S -->|User Interface| I
-    end
-
-    classDef ingestion fill:#ffcc99,stroke:#ff9933,stroke-width:2px;
-    classDef storage fill:#99ccff,stroke:#3399ff,stroke-width:2px;
-    classDef query fill:#ccff99,stroke:#99cc33,stroke-width:2px;
-    classDef auto fill:#cc99ff,stroke:#9933ff,stroke-width:2px;
-    classDef frontend fill:#ffff99,stroke:#cccc33,stroke-width:2px;
-
-    class A,B,C,D,E ingestion;
-    class F,G,H storage;
-    class I,J,K,L,M,N query;
-    class O,P,Q,R auto;
-    class S frontend;
