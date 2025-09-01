@@ -1,3 +1,10 @@
+---
+title: Catholic Church of St. Hippolytus (Helden) – Historical Overview
+date: 2025-09-01
+description: Nearly 1,000-year history of St. Hippolytus Church in Helden, from its 11th-century founding by Archbishop Anno II through its role as Westphalia's spiritual center.
+tags: church history, Romanesque architecture, Westphalia, Catholic history, medieval Germany
+---
+
 # Catholic Church of St. Hippolytus (Helden) – Historical Overview
 
 ## Origins and Medieval Foundations (11th–13th Century)  
