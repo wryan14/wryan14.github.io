@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles</title>
+    <style>
+        :root {
+            --primary: #475569;
+            --secondary: #64748b;
+            --accent: #0891b2;
+            --warm: #ea580c;
+            --heading: #1e293b;
+            --meta: #94a3b8;
+            --border: #e2e8f0;
+            --bg-subtle: #fafafa;
+            --bg-lighter: #f8fafc;
+        }
+
+        [data-theme="dark"] {
+            --primary: #cbd5e1;
+            --secondary: #94a3b8;
+            --accent: #22d3ee;
+            --warm: #fb923c;
+            --heading: #f1f5f9;
+            --meta: #64748b;
+            --border: #334155;
+            --bg-subtle: #1e293b;
+            --bg-lighter: #0f172a;
+            background: #0f172a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: white;
+        }
+
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            line-height: 1.65;
+            color: var(--primary);
+            background: white;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 32px 20px;
+        }
+
+        /* Header */
+        header {
+            margin-bottom: 52px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1.site-title {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--heading);
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        h1.site-title:hover {
+            color: var(--accent);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 14px;
+            color: var(--meta);
+            transition: all 0.2s;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Article List */
+        .article-list {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .article-card {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .article-card:last-child {
+            border-bottom: none;
+        }
+
+        .article-card:hover .article-title {
+            color: var(--accent);
+        }
+
+        .article-title {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--heading);
+            margin-bottom: 8px;
+            line-height: 1.2;
+            transition: color 0.2s;
+        }
+
+        .article-meta {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 14px;
+            color: var(--meta);
+            margin-bottom: 12px;
+        }
+
+        .article-excerpt {
+            font-size: 18px;
+            color: var(--primary);
+            line-height: 1.5;
+        }
+
+        /* Article View */
+        .article-view {
+            display: none;
+        }
+
+        .article-header {
+            margin-bottom: 32px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .article-view h1 {
+            font-size: 40px;
+            line-height: 1.2;
+            color: var(--heading);
+            margin-bottom: 12px;
+        }
+
+        .back-button {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 14px;
+            color: var(--secondary);
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 32px;
+            transition: color 0.2s;
+        }
+
+        .back-button:hover {
+            color: var(--accent);
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--accent);
+            width: 0;
+            transition: width 0.2s;
+            z-index: 1000;
+        }
+
+        /* Markdown Content Styles */
+        .article-content {
+            font-size: 18px;
+        }
+
+        .article-content > *:first-child {
+            font-size: 20px;
+            line-height: 1.5;
+            color: var(--primary);
+        }
+
+        .article-content h1,
+        .article-content h2,
+        .article-content h3,
+        .article-content h4 {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--heading);
+            margin-top: 32px;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .article-content h2 {
+            font-size: 32px;
+            margin-top: 52px;
+        }
+
+        .article-content h3 {
+            font-size: 24px;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5em;
+        }
+
+        .article-content a {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: all 0.2s;
+            border-bottom: 1px solid transparent;
+        }
+
+        .article-content a:hover {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        .article-content blockquote {
+            border-left: 3px solid var(--accent);
+            padding-left: 20px;
+            margin: 32px 0;
+            font-style: italic;
+            color: var(--secondary);
+        }
+
+        .article-content code {
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            font-size: 0.9em;
+            padding: 2px 6px;
+            background: var(--bg-subtle);
+            border-radius: 3px;
+        }
+
+        .article-content pre {
+            background: var(--bg-subtle);
+            padding: 20px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 32px 0;
+        }
+
+        .article-content pre code {
+            background: none;
+            padding: 0;
+            font-size: 16px;
+        }
+
+        .article-content ul,
+        .article-content ol {
+            margin-bottom: 1.5em;
+            padding-left: 32px;
+        }
+
+        .article-content li {
+            margin-bottom: 8px;
+        }
+
+        .article-content hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 52px 0;
+        }
+
+        .article-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin: 32px 0;
+        }
+
+        .article-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 32px 0;
+        }
+
+        .article-content th,
+        .article-content td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .article-content th {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-weight: 600;
+            color: var(--heading);
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 52px 0;
+            color: var(--meta);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .error {
+            text-align: center;
+            padding: 52px 0;
+            color: var(--warm);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 640px) {
+            .article-view h1 {
+                font-size: 32px;
+            }
+
+            .article-content h2 {
+                font-size: 28px;
+            }
+
+            .article-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1 class="site-title" onclick="showArticleList()">Articles</h1>
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <span id="themeIcon">🌙</span>
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <div id="articleList" class="article-list">
+                <div class="loading">Loading articles...</div>
+            </div>
+
+            <div id="articleView" class="article-view">
+                <a href="#" class="back-button" onclick="showArticleList(); return false;">← Back to articles</a>
+                <article>
+                    <div class="article-header">
+                        <h1 id="articleTitle"></h1>
+                        <div class="article-meta" id="articleMeta"></div>
+                    </div>
+                    <div id="articleContent" class="article-content"></div>
+                </article>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        // Global variable to store articles
+        let articles = [];
+
+        // Load articles configuration
+        async function loadArticlesConfig() {
+            try {
+                const response = await fetch('articles.json');
+                if (!response.ok) {
+                    throw new Error('Could not load articles.json');
+                }
+                const config = await response.json();
+                articles = config.articles || [];
+                
+                // Load the article list after config is loaded
+                await loadArticleList();
+            } catch (error) {
+                console.error('Error loading articles config:', error);
+                document.getElementById('articleList').innerHTML = `
+                    <div class="error">
+                        Error loading articles configuration.<br>
+                        Make sure articles.json exists in the same directory.
+                    </div>
+                `;
+            }
+        }
+
+        // Theme Management
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            document.getElementById('themeIcon').textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+
+        // Reading time calculation
+        function calculateReadingTime(text) {
+            const wordsPerMinute = 200;
+            const words = text.trim().split(/\s+/).length;
+            const minutes = Math.ceil(words / wordsPerMinute);
+            return `${minutes} min read`;
+        }
+
+        // Format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffTime = Math.abs(now - date);
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays === 0) return 'Today';
+            if (diffDays === 1) return 'Yesterday';
+            if (diffDays < 7) return `${diffDays} days ago`;
+            
+            return date.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric' 
+            });
+        }
+
+        // Extract excerpt from markdown
+        function extractExcerpt(markdown, length = 150) {
+            const text = markdown
+                .replace(/^#+\s+.*$/gm, '')
+                .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+                .replace(/[*_`~]/g, '')
+                .replace(/\n+/g, ' ')
+                .trim();
+            
+            if (text.length <= length) return text;
+            return text.substring(0, length).trim() + '...';
+        }
+
+        // Load and display article list
+        async function loadArticleList() {
+            const listContainer = document.getElementById('articleList');
+            listContainer.innerHTML = '';
+
+            // Sort articles by date (newest first)
+            const sortedArticles = [...articles].sort((a, b) => 
+                new Date(b.date) - new Date(a.date)
+            );
+
+            for (const article of sortedArticles) {
+                try {
+                    const response = await fetch(article.file);
+                    if (!response.ok) {
+                        console.error(`Could not load ${article.file}`);
+                        continue;
+                    }
+                    
+                    const markdown = await response.text();
+                    
+                    // Parse frontmatter if exists
+                    let title = article.title;
+                    let date = article.date;
+                    let content = markdown;
+                    let excerpt = article.excerpt;
+                    
+                    if (markdown.startsWith('---')) {
+                        const frontmatterEnd = markdown.indexOf('---', 3);
+                        if (frontmatterEnd !== -1) {
+                            const frontmatter = markdown.substring(3, frontmatterEnd);
+                            content = markdown.substring(frontmatterEnd + 3).trim();
+                            
+                            // Parse title and date from frontmatter (override config if present)
+                            const titleMatch = frontmatter.match(/title:\s*(.+)/);
+                            const dateMatch = frontmatter.match(/date:\s*(.+)/);
+                            const excerptMatch = frontmatter.match(/excerpt:\s*(.+)/);
+                            
+                            if (titleMatch) title = titleMatch[1].replace(/["']/g, '');
+                            if (dateMatch) date = dateMatch[1].replace(/["']/g, '');
+                            if (excerptMatch) excerpt = excerptMatch[1].replace(/["']/g, '');
+                        }
+                    }
+                    
+                    // Use excerpt from config/frontmatter or extract from content
+                    if (!excerpt) {
+                        excerpt = extractExcerpt(content);
+                    }
+                    
+                    const readingTime = calculateReadingTime(content);
+                    
+                    const card = document.createElement('div');
+                    card.className = 'article-card';
+                    card.onclick = () => loadArticle(article.file, title);
+                    
+                    card.innerHTML = `
+                        <h2 class="article-title">${title}</h2>
+                        <div class="article-meta">${formatDate(date)} · ${readingTime}</div>
+                        <div class="article-excerpt">${excerpt}</div>
+                    `;
+                    
+                    listContainer.appendChild(card);
+                } catch (error) {
+                    console.error(`Error loading ${article.file}:`, error);
+                }
+            }
+            
+            if (listContainer.children.length === 0) {
+                listContainer.innerHTML = '<div class="error">No articles found. Make sure your markdown files are in the correct location.</div>';
+            }
+        }
+
+        // Load and display single article
+        async function loadArticle(file, title) {
+            const articleView = document.getElementById('articleView');
+            const articleList = document.getElementById('articleList');
+            const articleContent = document.getElementById('articleContent');
+            const articleTitle = document.getElementById('articleTitle');
+            const articleMeta = document.getElementById('articleMeta');
+            
+            articleContent.innerHTML = '<div class="loading">Loading article...</div>';
+            articleList.style.display = 'none';
+            articleView.style.display = 'block';
+            
+            try {
+                const response = await fetch(file);
+                let markdown = await response.text();
+                
+                // Find the article's date from config
+                const articleConfig = articles.find(a => a.file === file);
+                let date = articleConfig ? articleConfig.date : new Date().toISOString().split('T')[0];
+                
+                // Strip frontmatter if exists and extract metadata
+                if (markdown.startsWith('---')) {
+                    const frontmatterEnd = markdown.indexOf('---', 3);
+                    if (frontmatterEnd !== -1) {
+                        const frontmatter = markdown.substring(3, frontmatterEnd);
+                        markdown = markdown.substring(frontmatterEnd + 3).trim();
+                        
+                        // Check for date in frontmatter
+                        const dateMatch = frontmatter.match(/date:\s*(.+)/);
+                        if (dateMatch) {
+                            date = dateMatch[1].replace(/["']/g, '');
+                        }
+                    }
+                }
+                
+                const readingTime = calculateReadingTime(markdown);
+                
+                articleTitle.textContent = title;
+                articleMeta.textContent = `${formatDate(date)} · ${readingTime}`;
+                
+                // Render markdown
+                const html = marked.parse(markdown);
+                articleContent.innerHTML = html;
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+                
+                // Initialize progress bar
+                initProgressBar();
+                
+            } catch (error) {
+                articleContent.innerHTML = `<div class="error">Error loading article: ${error.message}</div>`;
+            }
+        }
+
+        // Show article list
+        function showArticleList() {
+            document.getElementById('articleList').style.display = 'block';
+            document.getElementById('articleView').style.display = 'none';
+            document.getElementById('progressBar').style.width = '0';
+            window.scrollTo(0, 0);
+        }
+
+        // Progress bar
+        function initProgressBar() {
+            window.addEventListener('scroll', updateProgressBar);
+        }
+
+        function updateProgressBar() {
+            const articleView = document.getElementById('articleView');
+            if (articleView.style.display === 'none') return;
+            
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            loadArticlesConfig();
+        });
+
+        // Configure marked options
+        marked.setOptions({
+            breaks: true,
+            gfm: true,
+            headerIds: true,
+            langPrefix: 'language-',
+            sanitize: false
+        });
+    </script>
+</body>
+</html>
