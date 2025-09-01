@@ -1,6 +1,13 @@
 {
   "articles": [
     {
+      "title": "The Living Fire: Jacob Boehme's Aurora and Its Theological Legacy",
+      "date": "2025-01-09",
+      "file": "boehme-aurora-essay.md",
+      "excerpt": "Jacob Boehme's Aurora oder Morgenröte im Aufgang (1612) represents a watershed moment in Christian mystical thought, introducing a revolutionary dialectical theology that would profoundly shape Western intellectual history.",
+      "tags": ["theology", "mysticism", "Jacob Boehme", "William Blake", "German philosophy"]
+    },
+    {
       "title": "Sermon Transcriber Documentation",
       "date": "2025-09-01",
       "file": "sermon-transcriber.md",
