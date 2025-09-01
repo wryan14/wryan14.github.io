@@ -1,12 +1,12 @@
 ---
-title: "The Living Fire: Jacob Boehme's Aurora and Its Theological Legacy"
+title: "Jacob Boehme's Aurora and Theological Legacy"
 date: 2025-09-01
 description: "Jacob Boehme's Aurora (1612) introduced revolutionary dialectical theology that shaped Western thought from Blake to Hegel, challenging both evangelical orthodoxy and progressive liberalism with its mystical Christianity."
 tags: ["theology", "mysticism", "Jacob Boehme", "William Blake", "German philosophy", "dialectical theology", "Christian mysticism"]
 excerpt: "Jacob Boehme's Aurora oder Morgenröte im Aufgang (1612) represents a watershed moment in Christian mystical thought, introducing a revolutionary dialectical theology that would profoundly shape Western intellectual history."
 ---
 
-# The Living Fire: Jacob Boehme's Aurora and Its Theological Legacy
+# Jacob Boehme's Aurora and Theological Legacy
 
 ![Portrait of Jacob Boehme](https://raw.githubusercontent.com/wryan14/wryan14.github.io/main/images/boehme-portrait.jpg)
 *Portrait of Jacob Boehme (1575-1624), the German mystic and theologian*

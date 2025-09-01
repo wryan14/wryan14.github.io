@@ -1,46 +1,46 @@
 {
   "articles": [
     {
-      "title": "The Living Fire: Jacob Boehme's Aurora and Its Theological Legacy",
-      "date": "2025-01-09",
+      "title": "Jacob Boehme's Aurora and Theological Legacy",
+      "date": "2025-09-01",
       "file": "boehme-aurora-essay.md",
-      "excerpt": "Jacob Boehme's Aurora oder Morgenröte im Aufgang (1612) represents a watershed moment in Christian mystical thought, introducing a revolutionary dialectical theology that would profoundly shape Western intellectual history.",
-      "tags": ["theology", "mysticism", "Jacob Boehme", "William Blake", "German philosophy"]
+      "excerpt": "Jacob Boehme's Aurora (1612) introduced revolutionary dialectical theology that shaped Western thought from Blake to Hegel, challenging both evangelical orthodoxy and progressive liberalism.",
+      "tags": ["jacob boehme", "william blake", "mysticism", "dialectical theology", "german philosophy", "theology"]
     },
     {
       "title": "Sermon Transcriber Documentation",
-      "date": "2025-09-01",
-      "file": "sermon-transcriber.md",
-      "excerpt": "Documentation for an automated sermon transcription system using OpenAI Whisper API for accurate speech-to-text conversion.",
-      "tags": ["documentation", "transcription", "OpenAI", "automation"]
+      "date": "2025-04-14",
+      "file": "sermon-transcriber-docs.md",
+      "excerpt": "Documentation for an automated sermon transcription system using OpenAI Whisper API for accurate speech-to-text conversion of religious services.",
+      "tags": ["documentation", "openai", "whisper api", "automation", "transcription", "church technology"]
     },
     {
-      "title": "Origins and History of the Surname 'Wolfslayer'",
-      "date": "2025-09-01",
-      "file": "wolfslayer_surname.md",
-      "excerpt": "German surname Wolfschläger meaning 'wolf-slayer' traces to medieval wolf hunters, transformed to Wolfslayer in America through direct translation.",
-      "tags": ["genealogy", "German history", "surname origins", "immigration"]
+      "title": "St. Hippolytus Church in Helden",
+      "date": "2025-03-26",
+      "file": "st-hippolytus-helden.md",
+      "excerpt": "Nearly 1,000-year history of St. Hippolytus Church in Helden, from its 11th-century founding by Archbishop Anno II through its enduring role as a spiritual center.",
+      "tags": ["church history", "romanesque architecture", "westphalia", "catholic history", "medieval germany", "sacred architecture"]
     },
     {
-      "title": "William Blake's Mind-Forg'd Manacles in the Digital Age",
-      "date": "2025-09-01",
-      "file": "mind-forgd-manacles.md",
-      "excerpt": "Blake's 1794 warning about self-imposed mental chains finds new relevance in today's digital addictions and algorithmic echo chambers.",
-      "tags": ["William Blake", "digital culture", "social media", "philosophy", "literature"]
-    },
-    {
-      "title": "Catholic Church of St. Hippolytus (Helden) – Historical Overview",
-      "date": "2025-09-01",
-      "file": "saint-hippolytus-church.md",
-      "excerpt": "Nearly 1,000-year history of St. Hippolytus Church in Helden, from its 11th-century founding by Archbishop Anno II through its role as Westphalia's spiritual center.",
-      "tags": ["church history", "Romanesque architecture", "Westphalia", "Catholic history", "medieval Germany"]
-    },
-    {
-      "title": "Grace and Works - A Biblical Synthesis Through Organic Metaphors",
-      "date": "2025-09-01",
+      "title": "Grace and Works Through Biblical Metaphors",
+      "date": "2025-02-23",
       "file": "grace-works-synthesis.md",
-      "excerpt": "Biblical metaphors of vines, seeds, and bodies reveal grace as wholly God's gift yet inherently participatory, transcending old grace-versus-works debates.",
-      "tags": ["theology", "grace", "biblical studies", "participatory theology", "synergism"]
+      "excerpt": "Biblical metaphors of vines, seeds, and bodies reveal grace as wholly God's gift yet inherently participatory, transcending traditional grace-versus-works debates.",
+      "tags": ["theology", "biblical studies", "grace", "participatory theology", "synergism", "soteriology"]
+    },
+    {
+      "title": "Blake's Manacles in Digital Culture",
+      "date": "2025-02-23",
+      "file": "blake-digital-manacles.md",
+      "excerpt": "Blake's 1794 concept of self-imposed mental chains finds striking relevance in today's digital addictions, algorithmic echo chambers, and passive content consumption.",
+      "tags": ["william blake", "digital culture", "social media", "philosophy", "literature", "technology criticism"]
+    },
+    {
+      "title": "Origins of the Wolfslayer Surname",
+      "date": "2025-02-19",
+      "file": "wolfslayer-surname.md",
+      "excerpt": "The German surname Wolfschläger, meaning 'wolf-slayer,' traces to medieval wolf hunters and transformed to Wolfslayer in America through direct translation.",
+      "tags": ["genealogy", "surname origins", "german history", "immigration", "medieval germany", "westphalia"]
     }
   ]
 }
