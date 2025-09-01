@@ -1,39 +1,39 @@
 {
   "articles": [
     {
-      "title": "Origins and History of the Surname \"Wolfslayer\"",
+      "title": "Sermon Transcriber Documentation",
       "date": "2025-09-01",
-      "file": "./wolfslayer_surname.md",
-      "excerpt": "German surname Wolfschläger meaning \"wolf-slayer\" traces to medieval wolf hunters, transformed to Wolfslayer in America through direct translation.",
+      "file": "sermon-transcriber.md",
+      "excerpt": "Documentation for an automated sermon transcription system using OpenAI Whisper API for accurate speech-to-text conversion.",
+      "tags": ["documentation", "transcription", "OpenAI", "automation"]
+    },
+    {
+      "title": "Origins and History of the Surname 'Wolfslayer'",
+      "date": "2025-09-01",
+      "file": "wolfslayer_surname.md",
+      "excerpt": "German surname Wolfschläger meaning 'wolf-slayer' traces to medieval wolf hunters, transformed to Wolfslayer in America through direct translation.",
       "tags": ["genealogy", "German history", "surname origins", "immigration"]
     },
     {
       "title": "William Blake's Mind-Forg'd Manacles in the Digital Age",
       "date": "2025-09-01",
-      "file": "./mind-forgd-manacles.md",
+      "file": "mind-forgd-manacles.md",
       "excerpt": "Blake's 1794 warning about self-imposed mental chains finds new relevance in today's digital addictions and algorithmic echo chambers.",
       "tags": ["William Blake", "digital culture", "social media", "philosophy", "literature"]
     },
     {
       "title": "Catholic Church of St. Hippolytus (Helden) – Historical Overview",
       "date": "2025-09-01",
-      "file": "./saint-hippolytus-church.md",
+      "file": "saint-hippolytus-church.md",
       "excerpt": "Nearly 1,000-year history of St. Hippolytus Church in Helden, from its 11th-century founding by Archbishop Anno II through its role as Westphalia's spiritual center.",
       "tags": ["church history", "Romanesque architecture", "Westphalia", "Catholic history", "medieval Germany"]
     },
     {
       "title": "Grace and Works - A Biblical Synthesis Through Organic Metaphors",
       "date": "2025-09-01",
-      "file": "./grace-works-synthesis.md",
+      "file": "grace-works-synthesis.md",
       "excerpt": "Biblical metaphors of vines, seeds, and bodies reveal grace as wholly God's gift yet inherently participatory, transcending old grace-versus-works debates.",
       "tags": ["theology", "grace", "biblical studies", "participatory theology", "synergism"]
-    },
-    {
-      "title": "Sermon Transcriber Documentation",
-      "date": "2025-09-01",
-      "file": "./sermon-transcriber.md",
-      "excerpt": "Documentation for an automated sermon transcription system using OpenAI Whisper API for accurate speech-to-text conversion.",
-      "tags": ["documentation", "transcription", "OpenAI", "automation"]
     }
   ]
 }
