@@ -5,9 +5,9 @@ description: German surname Wolfschläger meaning "wolf-slayer" traces to mediev
 tags: genealogy, German history, surname origins, immigration
 ---
 
-# Origins and History of the Surname **“Wolfslayer”** 
+# Origins and History of the Surname "Wolfslayer"
 
-**“Wolfslayer”** is an English-language form of a Germanic surname, originally derived from **“Wolfschläger”** (also spelled *Wolfschlaeger* with ae or *Wolfschlager* without the umlaut). This surname is exceptionally rare and carries a vivid meaning. Below, we delve into its linguistic roots, historical context, regional origins in German/Prussian lands, genealogical records, and how it was Americanized upon immigration. 
+**"Wolfslayer"** is an English-language form of a Germanic surname, originally derived from **“Wolfschläger”** (also spelled *Wolfschlaeger* with ae or *Wolfschlager* without the umlaut). This surname is exceptionally rare and carries a vivid meaning. Below, we delve into its linguistic roots, historical context, regional origins in German/Prussian lands, genealogical records, and how it was Americanized upon immigration. 
 
 ## Linguistic and Etymological Breakdown 
 
@@ -23,7 +23,7 @@ In summary, from a linguistic standpoint **“Wolfslayer”** is a direct transl
 
 The origin of *Wolfschläger* as a surname is tied to the historical reality of **wolves in Central Europe** and the humans who dealt with them. In medieval and early modern Germany (including Prussian territories), wolves were widespread and posed a threat to livestock and occasionally to people. Communities often had to organize **wolf hunts** or assign individuals to protect farm animals from wolf attacks. 
 
-![Historical depiction of the Wolf of Ansbach being chased into a well, 1685](https://upload.wikimedia.org/wikipedia/commons/6/6e/Werwolf_von_Neuses.png)
+![Historical depiction of the Wolf of Ansbach being chased into a well, 1685](https://raw.githubusercontent.com/wryan14/wryan14.github.io/main/images/wolf-of-ansbach.png)
 *A 1685 illustration depicting the famous Wolf of Ansbach hunt near Neuses, Germany. Such dramatic wolf hunts were common in German communities where professional wolf hunters, or "Wolfschläger," were essential for protecting settlements from wolf attacks.*
 
 It was not uncommon for someone who had killed a wolf (especially a notorious or dangerous one) to earn renown or a nickname for that feat. Over time, such a nickname could solidify into a hereditary surname passed to descendants. Thus, it's very likely that the original *Wolfschläger* was an individual known as *"the wolf-slayer"* in his community – either because it was his job to hunt wolves or because of a singular noteworthy act of killing a wolf. 
