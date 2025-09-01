@@ -1,6 +1,13 @@
 {
   "articles": [
     {
+        "title": "Homesteading as Revolutionary Praxis",
+        "date": "2025-01-09",
+        "file": "homesteading-revolutionary-praxis.md",
+        "excerpt": "Ben Falk's resilient homesteading philosophy offers practical responses to Debord's spectacle and Marcuse's one-dimensionality, though tensions remain between individual practice and systemic transformation.",
+        "tags": ["ben falk", "guy debord", "herbert marcuse", "homesteading", "critical theory", "permaculture", "political ecology"]
+    },
+    {
       "title": "Jacob Boehme's Aurora and Theological Legacy",
       "date": "2025-09-01",
       "file": "boehme-aurora-essay.md",
