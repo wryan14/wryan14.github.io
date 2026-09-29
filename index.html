@@ -2,1183 +2,392 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Articles</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ryan Wolfslayer</title>
+    <link rel="icon" href="favicon.ico">
+    <script>
+        // Apply a saved theme before first paint to avoid a flash.
+        try {
+            const saved = localStorage.getItem('theme');
+            if (saved === 'light' || saved === 'dark') document.documentElement.dataset.theme = saved;
+        } catch (e) {}
+    </script>
     <style>
         :root {
-            --primary: #475569;
-            --secondary: #64748b;
-            --accent: #0891b2;
-            --warm: #ea580c;
-            --heading: #1e293b;
-            --meta: #94a3b8;
-            --border: #e2e8f0;
-            --bg-subtle: #fafafa;
-            --bg-lighter: #f8fafc;
+            --text: #2e2e2e;
+            --muted: #6e6e6e;
+            --heading: #141414;
+            --link: #1f5f8b;
+            --border: #e3e3e0;
+            --subtle: #f2f2ef;
+            --bg: #fdfdfb;
+            color-scheme: light;
         }
 
-        [data-theme="dark"] {
-            --primary: #cbd5e1;
-            --secondary: #94a3b8;
-            --accent: #22d3ee;
-            --warm: #fb923c;
-            --heading: #f1f5f9;
-            --meta: #64748b;
-            --border: #334155;
-            --bg-subtle: #1e293b;
-            --bg-lighter: #0f172a;
-            background: #0f172a;
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --text: #d6d6d2;
+                --muted: #9a9a95;
+                --heading: #f2f2ee;
+                --link: #7fb8e0;
+                --border: #33332f;
+                --subtle: #22221f;
+                --bg: #171715;
+                color-scheme: dark;
+            }
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root[data-theme="dark"] {
+            --text: #d6d6d2;
+            --muted: #9a9a95;
+            --heading: #f2f2ee;
+            --link: #7fb8e0;
+            --border: #33332f;
+            --subtle: #22221f;
+            --bg: #171715;
+            color-scheme: dark;
         }
 
-        ::selection {
-            background: var(--accent);
-            color: white;
-        }
+        * { box-sizing: border-box; }
 
         body {
-            font-family: Georgia, 'Times New Roman', serif;
-            line-height: 1.65;
-            color: var(--primary);
-            background: white;
-            transition: background 0.2s, color 0.2s;
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font: 19px/1.7 Georgia, 'Times New Roman', serif;
         }
 
+        .sans,
+        .site-header,
+        .meta,
+        .back,
+        .status,
+        .article-body h2,
+        .article-body h3,
+        .article-body h4,
+        .article-body th {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        a { color: var(--link); }
+
         .container {
-            max-width: 720px;
+            max-width: 680px;
             margin: 0 auto;
-            padding: 32px 20px;
+            padding: 32px 16px 96px;
         }
 
         /* Header */
-        header {
-            margin-bottom: 52px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .header-content {
+        .site-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            padding-bottom: 16px;
+            margin-bottom: 48px;
+            border-bottom: 1px solid var(--border);
         }
 
-        .site-branding {
-            display: flex;
-            align-items: baseline;
-            gap: 12px;
-            cursor: pointer;
-            transition: opacity 0.2s;
-        }
-
-        .site-branding:hover {
-            opacity: 0.8;
-        }
-
-        h1.site-title {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-size: 24px;
+        .site-name {
+            font-size: 20px;
             font-weight: 600;
             color: var(--heading);
-            transition: color 0.2s;
-        }
-
-        .site-tagline {
-            font-family: Georgia, serif;
-            font-size: 14px;
-            color: var(--meta);
-            font-style: italic;
+            text-decoration: none;
         }
 
         .theme-toggle {
+            font: inherit;
+            font-size: 14px;
+            color: var(--muted);
             background: none;
             border: 1px solid var(--border);
-            padding: 8px 12px;
             border-radius: 4px;
+            padding: 4px 10px;
             cursor: pointer;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-size: 14px;
-            color: var(--meta);
-            transition: all 0.2s;
         }
 
-        .theme-toggle:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
+        .theme-toggle:hover { color: var(--heading); }
 
-        /* Search Bar */
-        .search-container {
-            position: relative;
-            margin-top: 20px;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 12px 44px 12px 16px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-size: 15px;
-            background: var(--bg-lighter);
-            color: var(--primary);
-            transition: all 0.2s;
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: var(--accent);
-            background: white;
-        }
-
-        [data-theme="dark"] .search-input:focus {
-            background: var(--bg-subtle);
-        }
-
-        .search-input::placeholder {
-            color: var(--meta);
-        }
-
-        .search-icon {
-            position: absolute;
-            right: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--meta);
-            pointer-events: none;
-        }
-
-        .clear-search {
-            position: absolute;
-            right: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: var(--meta);
-            cursor: pointer;
-            padding: 4px;
-            font-size: 18px;
-            display: none;
-            transition: color 0.2s;
-        }
-
-        .clear-search:hover {
-            color: var(--primary);
-        }
-
-        .clear-search.visible {
-            display: block;
-        }
-
-        /* Filter Tags */
-        .filter-section {
-            margin: 24px 0;
-            display: none;
-        }
-
-        .filter-section.visible {
-            display: block;
-        }
-
-        .filter-label {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--meta);
-            margin-bottom: 8px;
-        }
-
-        .filter-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .filter-tag {
-            padding: 6px 12px;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-size: 13px;
-            color: var(--secondary);
-            background: white;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        [data-theme="dark"] .filter-tag {
-            background: var(--bg-subtle);
-        }
-
-        .filter-tag:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        .filter-tag.active {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-        }
-
-        /* Search Results Info */
-        .search-info {
-            margin: 20px 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-size: 14px;
-            color: var(--meta);
-        }
-
-        .search-info strong {
-            color: var(--primary);
-        }
-
-        /* Article List */
+        /* Article list */
         .article-list {
-            display: flex;
-            flex-direction: column;
-            gap: 32px;
-        }
-
-        .article-card {
-            padding: 20px 0;
-            border-bottom: 1px solid var(--border);
-            cursor: pointer;
-            transition: all 0.2s;
-            opacity: 1;
-            animation: fadeIn 0.3s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { 
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to { 
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .article-card:last-child {
-            border-bottom: none;
-        }
-
-        .article-card:hover .article-title {
-            color: var(--accent);
-        }
-
-        .article-title {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-size: 28px;
-            font-weight: 600;
-            color: var(--heading);
-            margin-bottom: 8px;
-            line-height: 1.2;
-            transition: color 0.2s;
-        }
-
-        .article-meta {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-size: 14px;
-            color: var(--meta);
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .article-tags {
-            display: inline-flex;
-            gap: 6px;
-        }
-
-        .article-tag {
-            padding: 2px 8px;
-            background: var(--bg-subtle);
-            border-radius: 12px;
-            font-size: 12px;
-            color: var(--secondary);
-        }
-
-        .article-excerpt {
-            font-size: 18px;
-            color: var(--primary);
-            line-height: 1.5;
-        }
-
-        .highlight {
-            background: yellow;
-            color: var(--heading);
-            padding: 2px;
-            border-radius: 2px;
-        }
-
-        [data-theme="dark"] .highlight {
-            background: var(--warm);
-            color: white;
-        }
-
-        /* Article View */
-        .article-view {
-            display: none;
-        }
-
-        .article-header {
-            margin-bottom: 32px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .article-view h1 {
-            font-size: 40px;
-            line-height: 1.2;
-            color: var(--heading);
-            margin-bottom: 12px;
-        }
-
-        .back-button {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-size: 14px;
-            color: var(--secondary);
-            text-decoration: none;
-            display: inline-block;
-            margin-bottom: 32px;
-            transition: color 0.2s;
-        }
-
-        .back-button:hover {
-            color: var(--accent);
-        }
-
-        /* Back to Top Button */
-        .back-to-top {
-            position: fixed;
-            bottom: 32px;
-            right: 32px;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: var(--accent);
-            color: white;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .back-to-top:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-        }
-
-        /* Progress Bar */
-        .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 3px;
-            background: var(--accent);
-            width: 0;
-            transition: width 0.2s;
-            z-index: 1000;
-        }
-
-        /* Markdown Content Styles */
-        .article-content {
-            font-size: 18px;
-        }
-
-        .article-content > *:first-child {
-            font-size: 20px;
-            line-height: 1.5;
-            color: var(--primary);
-        }
-
-        .article-content h1,
-        .article-content h2,
-        .article-content h3,
-        .article-content h4 {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            color: var(--heading);
-            margin-top: 32px;
-            margin-bottom: 12px;
-            line-height: 1.2;
-            scroll-margin-top: 80px;
-        }
-
-        .article-content h2 {
-            font-size: 32px;
-            margin-top: 52px;
-        }
-
-        .article-content h3 {
-            font-size: 24px;
-        }
-
-        .article-content p {
-            margin-bottom: 1.5em;
-        }
-
-        .article-content a {
-            color: var(--secondary);
-            text-decoration: none;
-            transition: all 0.2s;
-            border-bottom: 1px solid transparent;
-        }
-
-        .article-content a:hover {
-            color: var(--accent);
-            border-bottom-color: var(--accent);
-        }
-
-        .article-content blockquote {
-            border-left: 3px solid var(--accent);
-            padding-left: 20px;
-            margin: 32px 0;
-            font-style: italic;
-            color: var(--secondary);
-        }
-
-        .article-content code {
-            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
-            font-size: 0.9em;
-            padding: 2px 6px;
-            background: var(--bg-subtle);
-            border-radius: 3px;
-        }
-
-        .article-content pre {
-            background: var(--bg-subtle);
-            padding: 20px;
-            border-radius: 4px;
-            overflow-x: auto;
-            margin: 32px 0;
-        }
-
-        .article-content pre code {
-            background: none;
+            list-style: none;
+            margin: 0;
             padding: 0;
+        }
+
+        .article-list li + li {
+            margin-top: 40px;
+        }
+
+        .article-list h2 {
+            margin: 0 0 4px;
+            font-size: 26px;
+            line-height: 1.25;
+        }
+
+        .article-list h2 a {
+            color: var(--heading);
+            text-decoration: none;
+        }
+
+        .article-list h2 a:hover { color: var(--link); }
+
+        .article-list p { margin: 8px 0 0; }
+
+        .meta {
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .status {
+            color: var(--muted);
             font-size: 16px;
         }
 
-        .article-content ul,
-        .article-content ol {
-            margin-bottom: 1.5em;
-            padding-left: 32px;
+        /* Article view */
+        .back {
+            display: inline-block;
+            margin-bottom: 32px;
+            font-size: 14px;
+            color: var(--muted);
+            text-decoration: none;
         }
 
-        .article-content li {
-            margin-bottom: 8px;
+        .back:hover { color: var(--link); }
+
+        .article-header {
+            margin-bottom: 40px;
         }
 
-        .article-content hr {
-            border: none;
-            border-top: 1px solid var(--border);
-            margin: 52px 0;
+        .article-header h1 {
+            margin: 0 0 8px;
+            font-size: 40px;
+            line-height: 1.15;
+            color: var(--heading);
         }
 
-        .article-content img {
+        .article-body h2,
+        .article-body h3,
+        .article-body h4 {
+            color: var(--heading);
+            line-height: 1.25;
+            margin: 48px 0 12px;
+        }
+
+        .article-body h2 { font-size: 26px; }
+        .article-body h3 { font-size: 21px; }
+
+        .article-body p,
+        .article-body ul,
+        .article-body ol {
+            margin: 0 0 1.4em;
+        }
+
+        .article-body li { margin-bottom: 8px; }
+
+        .article-body img {
+            display: block;
             max-width: 100%;
             height: auto;
+            margin: 32px 0 12px;
             border-radius: 4px;
-            margin: 32px 0;
         }
 
-        .article-content table {
+        /* Caption: an italic line directly under an image */
+        .article-body p > img + br { display: none; }
+
+        .article-body p > img ~ em {
+            display: block;
+            font-size: 15px;
+            line-height: 1.5;
+            color: var(--muted);
+        }
+
+        .article-body blockquote {
+            margin: 32px 0;
+            padding-left: 20px;
+            border-left: 3px solid var(--border);
+            color: var(--muted);
+        }
+
+        .article-body code {
+            font-size: 0.85em;
+            padding: 2px 5px;
+            background: var(--subtle);
+            border-radius: 3px;
+        }
+
+        .article-body pre {
+            padding: 16px;
+            overflow-x: auto;
+            background: var(--subtle);
+            border-radius: 4px;
+        }
+
+        .article-body pre code { padding: 0; }
+
+        .article-body hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 48px 0;
+        }
+
+        .article-body table {
             width: 100%;
             border-collapse: collapse;
             margin: 32px 0;
         }
 
-        .article-content th,
-        .article-content td {
+        .article-body th,
+        .article-body td {
             text-align: left;
-            padding: 12px;
+            padding: 8px 12px;
             border-bottom: 1px solid var(--border);
         }
 
-        .article-content th {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-weight: 600;
-            color: var(--heading);
-        }
-
-        /* Loading State */
-        .loading {
-            text-align: center;
-            padding: 52px 0;
-            color: var(--meta);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-
-        .error {
-            text-align: center;
-            padding: 52px 0;
-            color: var(--warm);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-
-        .no-results {
-            text-align: center;
-            padding: 52px 20px;
-            color: var(--meta);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-
-        .no-results h3 {
-            color: var(--heading);
-            margin-bottom: 12px;
-        }
-
-        /* Mobile Adjustments */
-        @media (max-width: 640px) {
-            .site-branding {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 4px;
-            }
-
-            .article-view h1 {
-                font-size: 32px;
-            }
-
-            .article-content h2 {
-                font-size: 28px;
-            }
-
-            .article-title {
-                font-size: 24px;
-            }
-
-            .back-to-top {
-                bottom: 20px;
-                right: 20px;
-                width: 40px;
-                height: 40px;
-                font-size: 18px;
-            }
+        @media (max-width: 600px) {
+            body { font-size: 18px; }
+            .article-header h1 { font-size: 32px; }
+            .article-list h2 { font-size: 23px; }
         }
     </style>
 </head>
 <body>
-    <div class="progress-bar" id="progressBar"></div>
-    
     <div class="container">
-        <header>
-            <div class="header-content">
-                <div class="site-branding" onclick="showArticleList()">
-                    <h1 class="site-title">Articles</h1>
-                    <span class="site-tagline">Thoughts & writings</span>
-                </div>
-                <button class="theme-toggle" onclick="toggleTheme()">
-                    <span id="themeIcon">🌙</span>
-                </button>
-            </div>
-            <div class="search-container">
-                <input 
-                    type="text" 
-                    class="search-input" 
-                    id="searchInput" 
-                    placeholder="Search articles, tags, or topics..."
-                    oninput="handleSearch()"
-                >
-                <span class="search-icon">🔍</span>
-                <button class="clear-search" id="clearSearch" onclick="clearSearch()">×</button>
-            </div>
+        <header class="site-header">
+            <a class="site-name" href="#">Ryan Wolfslayer</a>
+            <button class="theme-toggle" id="themeToggle" type="button">Dark</button>
         </header>
-
-        <main>
-            <div id="filterSection" class="filter-section">
-                <div class="filter-label">Filter by tag</div>
-                <div class="filter-tags" id="filterTags"></div>
-            </div>
-
-            <div id="searchInfo" class="search-info" style="display: none;"></div>
-
-            <div id="articleList" class="article-list">
-                <div class="loading">Loading articles...</div>
-            </div>
-
-            <div id="articleView" class="article-view">
-                <a href="#" class="back-button" onclick="showArticleList(); return false;">← Back to articles</a>
-                <article>
-                    <div class="article-header">
-                        <h1 id="articleTitle"></h1>
-                        <div class="article-meta" id="articleMeta"></div>
-                    </div>
-                    <div id="articleContent" class="article-content"></div>
-                </article>
-            </div>
+        <main id="main">
+            <p class="status">Loading…</p>
         </main>
+        <noscript><p class="status">This site needs JavaScript to display articles.</p></noscript>
     </div>
 
-    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
-
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@18.0.14/lib/marked.umd.js"></script>
     <script>
-        // Global variables
+        const SITE_NAME = 'Ryan Wolfslayer';
+        const main = document.getElementById('main');
+        const themeToggle = document.getElementById('themeToggle');
         let articles = [];
-        let processedArticles = [];
-        let allTags = new Set();
-        let activeTag = null;
-        let searchQuery = '';
+        let renderId = 0;
 
-        // Load articles configuration
-        async function loadArticlesConfig() {
+        marked.use({ gfm: true, breaks: true });
+
+        // Theme
+        function currentTheme() {
+            return document.documentElement.dataset.theme
+                || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        }
+
+        function updateThemeToggle() {
+            themeToggle.textContent = currentTheme() === 'dark' ? 'Light' : 'Dark';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const next = currentTheme() === 'dark' ? 'light' : 'dark';
+            document.documentElement.dataset.theme = next;
+            try { localStorage.setItem('theme', next); } catch (e) {}
+            updateThemeToggle();
+        });
+
+        matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateThemeToggle);
+        updateThemeToggle();
+
+        // Helpers
+        function escapeHtml(text) {
+            return text.replace(/[&<>"']/g, c => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            })[c]);
+        }
+
+        // Slugs come from titles, so renaming an article changes its URL.
+        function slugify(title) {
+            return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+        }
+
+        function formatDate(isoDate) {
+            return new Date(isoDate).toLocaleDateString('en-US', {
+                year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC'
+            });
+        }
+
+        // Views
+        function renderList() {
+            document.title = SITE_NAME;
+            main.innerHTML = `
+                <ul class="article-list">
+                    ${articles.map(article => `
+                        <li>
+                            <h2 class="sans"><a href="#article/${article.slug}">${escapeHtml(article.title)}</a></h2>
+                            <time class="meta" datetime="${article.date}">${formatDate(article.date)}</time>
+                            <p>${escapeHtml(article.excerpt)}</p>
+                        </li>
+                    `).join('')}
+                </ul>
+            `;
+        }
+
+        async function renderArticle(article) {
+            const id = ++renderId;
+            document.title = `${article.title} · ${SITE_NAME}`;
+            main.innerHTML = '<p class="status">Loading…</p>';
+
             try {
-                const response = await fetch('articles.json');
-                if (!response.ok) {
-                    throw new Error('Could not load articles.json');
-                }
-                const config = await response.json();
-                articles = config.articles || [];
-                
-                // Load and process articles
-                await loadArticleList();
+                const response = await fetch(article.file);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const markdown = await response.text();
+                if (id !== renderId) return;
+
+                const minutes = Math.max(1, Math.round(markdown.split(/\s+/).length / 200));
+                main.innerHTML = `
+                    <a class="back" href="#">← All articles</a>
+                    <article>
+                        <header class="article-header">
+                            <h1 class="sans">${escapeHtml(article.title)}</h1>
+                            <div class="meta">
+                                <time datetime="${article.date}">${formatDate(article.date)}</time> · ${minutes} min read
+                            </div>
+                        </header>
+                        <div class="article-body">${marked.parse(markdown)}</div>
+                    </article>
+                `;
             } catch (error) {
-                console.error('Error loading articles config:', error);
-                document.getElementById('articleList').innerHTML = `
-                    <div class="error">
-                        Error loading articles configuration.<br>
-                        Make sure articles.json exists in the same directory.
-                    </div>
-                `;
+                if (id !== renderId) return;
+                console.error(`Could not load ${article.file}:`, error);
+                main.innerHTML = '<p class="status">Couldn’t load this article. <a href="#">Back to all articles</a></p>';
             }
         }
 
-        // Theme Management
-        function initTheme() {
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            document.documentElement.setAttribute('data-theme', savedTheme);
-            updateThemeIcon(savedTheme);
-        }
+        // Routing: #article/<slug> shows an article; anything else shows the list.
+        function route() {
+            const match = location.hash.match(/^#article\/(.+)$/);
+            const article = match && articles.find(a => a.slug === decodeURIComponent(match[1]));
 
-        function toggleTheme() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateThemeIcon(newTheme);
-        }
-
-        function updateThemeIcon(theme) {
-            document.getElementById('themeIcon').textContent = theme === 'dark' ? '☀️' : '🌙';
-        }
-
-        // Reading time calculation
-        function calculateReadingTime(text) {
-            const wordsPerMinute = 200;
-            const words = text.trim().split(/\s+/).length;
-            const minutes = Math.ceil(words / wordsPerMinute);
-            return `${minutes} min read`;
-        }
-
-        // Format date
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            const now = new Date();
-            const diffTime = Math.abs(now - date);
-            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-            
-            if (diffDays === 0) return 'Today';
-            if (diffDays === 1) return 'Yesterday';
-            if (diffDays < 7) return `${diffDays} days ago`;
-            
-            return date.toLocaleDateString('en-US', { 
-                year: 'numeric', 
-                month: 'short', 
-                day: 'numeric' 
-            });
-        }
-
-        // Extract excerpt from markdown
-        function extractExcerpt(markdown, length = 150) {
-            const text = markdown
-                .replace(/^#+\s+.*$/gm, '')
-                .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
-                .replace(/[*_`~]/g, '')
-                .replace(/\n+/g, ' ')
-                .trim();
-            
-            if (text.length <= length) return text;
-            return text.substring(0, length).trim() + '...';
-        }
-
-        // Load and process all articles
-        async function loadArticleList() {
-            const listContainer = document.getElementById('articleList');
-            processedArticles = [];
-            allTags.clear();
-
-            for (const article of articles) {
-                try {
-                    const response = await fetch(article.file);
-                    if (!response.ok) {
-                        console.error(`Could not load ${article.file}`);
-                        continue;
-                    }
-                    
-                    const markdown = await response.text();
-                    
-                    // Parse frontmatter and extract metadata
-                    let title = article.title;
-                    let date = article.date;
-                    let tags = article.tags || [];
-                    let content = markdown;
-                    let excerpt = article.excerpt;
-                    
-                    if (markdown.startsWith('---')) {
-                        const frontmatterEnd = markdown.indexOf('---', 3);
-                        if (frontmatterEnd !== -1) {
-                            const frontmatter = markdown.substring(3, frontmatterEnd);
-                            content = markdown.substring(frontmatterEnd + 3).trim();
-                            
-                            const titleMatch = frontmatter.match(/title:\s*(.+)/);
-                            const dateMatch = frontmatter.match(/date:\s*(.+)/);
-                            const excerptMatch = frontmatter.match(/excerpt:\s*(.+)/);
-                            const tagsMatch = frontmatter.match(/tags:\s*\[(.+)\]/);
-                            
-                            if (titleMatch) title = titleMatch[1].replace(/["']/g, '');
-                            if (dateMatch) date = dateMatch[1].replace(/["']/g, '');
-                            if (excerptMatch) excerpt = excerptMatch[1].replace(/["']/g, '');
-                            if (tagsMatch) {
-                                tags = tagsMatch[1].split(',').map(tag => 
-                                    tag.trim().replace(/["']/g, '')
-                                );
-                            }
-                        }
-                    }
-                    
-                    if (!excerpt) {
-                        excerpt = extractExcerpt(content);
-                    }
-                    
-                    // Add tags to global set
-                    tags.forEach(tag => allTags.add(tag));
-                    
-                    processedArticles.push({
-                        file: article.file,
-                        title,
-                        date,
-                        tags,
-                        excerpt,
-                        content,
-                        readingTime: calculateReadingTime(content),
-                        slug: article.slug // Can be optionally defined in articles.json
-                    });
-                } catch (error) {
-                    console.error(`Error loading ${article.file}:`, error);
-                }
-            }
-            
-            // Sort by date
-            processedArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
-            
-            // Display articles and filters
-            displayArticles(processedArticles);
-            displayFilterTags();
-        }
-
-        // Display filter tags
-        function displayFilterTags() {
-            const filterSection = document.getElementById('filterSection');
-            const filterTags = document.getElementById('filterTags');
-            
-            if (allTags.size === 0) {
-                filterSection.classList.remove('visible');
-                return;
-            }
-            
-            filterSection.classList.add('visible');
-            filterTags.innerHTML = '';
-            
-            // Add "All" tag
-            const allTag = document.createElement('button');
-            allTag.className = 'filter-tag active';
-            allTag.textContent = 'All';
-            allTag.onclick = () => filterByTag(null);
-            filterTags.appendChild(allTag);
-            
-            // Add other tags
-            Array.from(allTags).sort().forEach(tag => {
-                const tagButton = document.createElement('button');
-                tagButton.className = 'filter-tag';
-                tagButton.textContent = tag;
-                tagButton.onclick = () => filterByTag(tag);
-                filterTags.appendChild(tagButton);
-            });
-        }
-
-        // Filter by tag
-        function filterByTag(tag) {
-            activeTag = tag;
-            
-            // Update active state
-            document.querySelectorAll('.filter-tag').forEach(button => {
-                if (tag === null && button.textContent === 'All') {
-                    button.classList.add('active');
-                } else if (button.textContent === tag) {
-                    button.classList.add('active');
-                } else {
-                    button.classList.remove('active');
-                }
-            });
-            
-            // Apply filters
-            applyFilters();
-        }
-
-        // Search functionality
-        function handleSearch() {
-            const input = document.getElementById('searchInput');
-            const clearButton = document.getElementById('clearSearch');
-            
-            searchQuery = input.value.toLowerCase().trim();
-            
-            if (searchQuery) {
-                clearButton.classList.add('visible');
+            if (article) {
+                renderArticle(article);
             } else {
-                clearButton.classList.remove('visible');
+                renderId++;
+                renderList();
             }
-            
-            applyFilters();
-        }
-
-        function clearSearch() {
-            document.getElementById('searchInput').value = '';
-            document.getElementById('clearSearch').classList.remove('visible');
-            searchQuery = '';
-            applyFilters();
-        }
-
-        // Apply all filters
-        function applyFilters() {
-            let filtered = [...processedArticles];
-            
-            // Filter by tag
-            if (activeTag) {
-                filtered = filtered.filter(article => 
-                    article.tags.includes(activeTag)
-                );
-            }
-            
-            // Filter by search
-            if (searchQuery) {
-                filtered = filtered.filter(article => {
-                    const searchIn = [
-                        article.title,
-                        article.excerpt,
-                        article.content,
-                        ...article.tags
-                    ].join(' ').toLowerCase();
-                    
-                    return searchQuery.split(' ').every(term => 
-                        searchIn.includes(term)
-                    );
-                });
-            }
-            
-            // Update search info
-            updateSearchInfo(filtered.length);
-            
-            // Display results
-            displayArticles(filtered);
-        }
-
-        // Update search info
-        function updateSearchInfo(count) {
-            const searchInfo = document.getElementById('searchInfo');
-            
-            if (searchQuery || activeTag) {
-                let info = `Found <strong>${count}</strong> article${count !== 1 ? 's' : ''}`;
-                
-                if (searchQuery) {
-                    info += ` matching "<strong>${searchQuery}</strong>"`;
-                }
-                
-                if (activeTag) {
-                    info += searchQuery ? ' and' : '';
-                    info += ` tagged with <strong>${activeTag}</strong>`;
-                }
-                
-                searchInfo.innerHTML = info;
-                searchInfo.style.display = 'block';
-            } else {
-                searchInfo.style.display = 'none';
-            }
-        }
-
-        // Display articles
-        function displayArticles(articlesToShow) {
-            const listContainer = document.getElementById('articleList');
-            
-            if (articlesToShow.length === 0) {
-                listContainer.innerHTML = `
-                    <div class="no-results">
-                        <h3>No articles found</h3>
-                        <p>Try adjusting your search or filters</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            listContainer.innerHTML = '';
-            
-            articlesToShow.forEach((article, index) => {
-                const card = document.createElement('div');
-                card.className = 'article-card';
-                card.style.animationDelay = `${index * 0.05}s`;
-                card.onclick = () => loadArticle(article.file, article.title);
-                
-                // Highlight search terms in title and excerpt
-                let displayTitle = article.title;
-                let displayExcerpt = article.excerpt;
-                
-                if (searchQuery) {
-                    const terms = searchQuery.split(' ').filter(t => t);
-                    terms.forEach(term => {
-                        const regex = new RegExp(`(${term})`, 'gi');
-                        displayTitle = displayTitle.replace(regex, '<span class="highlight">$1</span>');
-                        displayExcerpt = displayExcerpt.replace(regex, '<span class="highlight">$1</span>');
-                    });
-                }
-                
-                // Build tags HTML
-                const tagsHtml = article.tags.length > 0 ? 
-                    `<span class="article-tags">
-                        ${article.tags.map(tag => 
-                            `<span class="article-tag">${tag}</span>`
-                        ).join('')}
-                    </span>` : '';
-                
-                card.innerHTML = `
-                    <h2 class="article-title">${displayTitle}</h2>
-                    <div class="article-meta">
-                        <span>${formatDate(article.date)} · ${article.readingTime}</span>
-                        ${tagsHtml}
-                    </div>
-                    <div class="article-excerpt">${displayExcerpt}</div>
-                `;
-                
-                listContainer.appendChild(card);
-            });
-        }
-
-        // Generate URL slug from title or filename
-        function generateSlug(title, file) {
-            // Try to use title first, fall back to filename
-            const source = title || file.replace('.md', '');
-            return source
-                .toLowerCase()
-                .replace(/[^a-z0-9]+/g, '-')
-                .replace(/^-+|-+$/g, '');
-        }
-
-        // Load and display single article
-        async function loadArticle(file, title, skipHistory = false) {
-            const articleView = document.getElementById('articleView');
-            const articleList = document.getElementById('articleList');
-            const articleContent = document.getElementById('articleContent');
-            const articleTitle = document.getElementById('articleTitle');
-            const articleMeta = document.getElementById('articleMeta');
-            
-            // Hide filters and search info when viewing article
-            document.getElementById('filterSection').style.display = 'none';
-            document.getElementById('searchInfo').style.display = 'none';
-            
-            articleContent.innerHTML = '<div class="loading">Loading article...</div>';
-            articleList.style.display = 'none';
-            articleView.style.display = 'block';
-            
-            try {
-                const response = await fetch(file);
-                let markdown = await response.text();
-                
-                // Find the article data
-                const articleData = processedArticles.find(a => a.file === file);
-                
-                if (articleData) {
-                    // Generate slug for URL
-                    const slug = articleData.slug || generateSlug(articleData.title, articleData.file);
-                    
-                    // Update URL without reloading page (unless we're handling a popstate)
-                    if (!skipHistory) {
-                        const newUrl = `#article/${slug}`;
-                        history.pushState({ type: 'article', file: file, title: articleData.title }, '', newUrl);
-                    }
-                    
-                    // Update page title
-                    document.title = `${articleData.title} | Articles`;
-                    
-                    // Build tags HTML
-                    const tagsHtml = articleData.tags.length > 0 ? 
-                        `<span class="article-tags">
-                            ${articleData.tags.map(tag => 
-                                `<span class="article-tag">${tag}</span>`
-                            ).join('')}
-                        </span>` : '';
-                    
-                    articleTitle.textContent = articleData.title;
-                    articleMeta.innerHTML = `
-                        <span>${formatDate(articleData.date)} · ${articleData.readingTime}</span>
-                        ${tagsHtml}
-                    `;
-                    
-                    // Render markdown (use processed content without frontmatter)
-                    const html = marked.parse(articleData.content);
-                    articleContent.innerHTML = html;
-                } else {
-                    // Fallback if article not found in processed list
-                    articleTitle.textContent = title;
-                    const html = marked.parse(markdown);
-                    articleContent.innerHTML = html;
-                    
-                    // Still update URL for consistency
-                    if (!skipHistory) {
-                        const slug = generateSlug(title, file);
-                        const newUrl = `#article/${slug}`;
-                        history.pushState({ type: 'article', file: file, title: title }, '', newUrl);
-                    }
-                    
-                    document.title = `${title} | Articles`;
-                }
-                
-                // Scroll to top
-                window.scrollTo(0, 0);
-                
-                // Initialize progress bar and back to top
-                initProgressBar();
-                
-            } catch (error) {
-                articleContent.innerHTML = `<div class="error">Error loading article: ${error.message}</div>`;
-            }
-        }
-
-        // Show article list
-        function showArticleList(skipHistory = false) {
-            document.getElementById('articleList').style.display = 'block';
-            document.getElementById('articleView').style.display = 'none';
-            document.getElementById('filterSection').style.display = '';
-            document.getElementById('progressBar').style.width = '0';
-            
-            // Update URL to home
-            if (!skipHistory) {
-                history.pushState({ type: 'home' }, '', '#');
-            }
-            
-            // Reset page title
-            document.title = 'Articles';
-            
-            // Re-apply filters to restore state
-            applyFilters();
-            
-            // Reset back to top button
-            document.getElementById('backToTop').classList.remove('visible');
-            
             window.scrollTo(0, 0);
         }
 
-        // Handle browser navigation (back/forward buttons)
-        function handleRouting() {
-            const hash = window.location.hash;
-            
-            if (hash.startsWith('#article/')) {
-                const slug = hash.replace('#article/', '');
-                
-                // Find article by slug
-                const article = processedArticles.find(a => {
-                    const articleSlug = a.slug || generateSlug(a.title, a.file);
-                    return articleSlug === slug;
-                });
-                
-                if (article) {
-                    loadArticle(article.file, article.title, true);
-                } else {
-                    // Article not found, show home
-                    showArticleList(true);
-                }
-            } else {
-                // Show home/article list
-                showArticleList(true);
-            }
-        }
-
-        // Back to top functionality
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+        fetch('articles.json')
+            .then(response => {
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                return response.json();
+            })
+            .then(list => {
+                articles = list
+                    .map(article => ({ ...article, slug: slugify(article.title) }))
+                    .sort((a, b) => b.date.localeCompare(a.date));
+                route();
+                window.addEventListener('hashchange', route);
+            })
+            .catch(error => {
+                console.error('Could not load articles.json:', error);
+                main.innerHTML = '<p class="status">Couldn’t load the article list.</p>';
             });
-        }
-
-        // Progress bar and back to top visibility
-        function initProgressBar() {
-            window.addEventListener('scroll', handleScroll);
-        }
-
-        function handleScroll() {
-            const articleView = document.getElementById('articleView');
-            const backToTop = document.getElementById('backToTop');
-            
-            // Progress bar
-            if (articleView.style.display !== 'none') {
-                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                const scrolled = (winScroll / height) * 100;
-                document.getElementById('progressBar').style.width = scrolled + '%';
-            }
-            
-            // Back to top button
-            if (window.scrollY > 300) {
-                backToTop.classList.add('visible');
-            } else {
-                backToTop.classList.remove('visible');
-            }
-        }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            initTheme();
-            loadArticlesConfig().then(() => {
-                // Handle initial route
-                handleRouting();
-            });
-            window.addEventListener('scroll', handleScroll);
-            
-            // Handle browser back/forward
-            window.addEventListener('popstate', handleRouting);
-        });
-
-        // Configure marked options
-        marked.setOptions({
-            breaks: true,
-            gfm: true,
-            headerIds: true,
-            langPrefix: 'language-',
-            sanitize: false
-        });
     </script>
 </body>
 </html>

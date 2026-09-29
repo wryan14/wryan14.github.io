@@ -1,60 +1,14 @@
-{
-  "articles": [
-    {
-      "title": "Who's Who in the Wolfslayer Family Archives",
-      "date": "2025-12-29",
-      "file": "wolfslayer-family-archives-guide.md",
-      "excerpt": "A recognition guide for identifying individuals in the Wolfslayer Family Archives video collection.",
-      "tags": ["genealogy", "family history", "wolfslayer", "video archive"]
-    },
-    {
-      "title": "Secret Lisbon Hidden Gems Near Rossio",
-      "date": "2025-09-25",
-      "file": "lisbon-hidden-gems-rossio.md",
-      "excerpt": "Within walking distance of Rossio Square, over 50 authentic treasures operate unnoticed—from Casa do Alentejo's concealed Moorish palace to 4-square-meter tascas serving massive portions for under €15.",
-      "tags": ["lisbon", "travel", "hidden gems", "portuguese culture", "urban exploration", "food culture", "architecture"]
-    },
-    {
-      "title": "Jacob Boehme's Aurora and Theological Legacy",
-      "date": "2025-09-01",
-      "file": "boehme-aurora-essay.md",
-      "excerpt": "Jacob Boehme's Aurora (1612) introduced revolutionary dialectical theology that shaped Western thought from Blake to Hegel, challenging both evangelical orthodoxy and progressive liberalism.",
-      "tags": ["jacob boehme", "william blake", "mysticism", "dialectical theology", "german philosophy", "theology"]
-    },
-    {
-      "title": "Sermon Transcriber Documentation",
-      "date": "2025-04-14",
-      "file": "sermon-transcriber-docs.md",
-      "excerpt": "Documentation for an automated sermon transcription system using OpenAI Whisper API for accurate speech-to-text conversion of religious services.",
-      "tags": ["documentation", "openai", "whisper api", "automation", "transcription", "church technology"]
-    },
-    {
-      "title": "St. Hippolytus Church in Helden",
-      "date": "2025-03-26",
-      "file": "st-hippolytus-helden.md",
-      "excerpt": "Nearly 1,000-year history of St. Hippolytus Church in Helden, from its 11th-century founding by Archbishop Anno II through its enduring role as a spiritual center.",
-      "tags": ["church history", "romanesque architecture", "westphalia", "catholic history", "medieval germany", "sacred architecture"]
-    },
-    {
-      "title": "Grace and Works Through Biblical Metaphors",
-      "date": "2025-02-23",
-      "file": "grace-works-synthesis.md",
-      "excerpt": "Biblical metaphors of vines, seeds, and bodies reveal grace as wholly God's gift yet inherently participatory, transcending traditional grace-versus-works debates.",
-      "tags": ["theology", "biblical studies", "grace", "participatory theology", "synergism", "soteriology"]
-    },
-    {
-      "title": "Blake's Manacles in Digital Culture",
-      "date": "2025-02-23",
-      "file": "blake-digital-manacles.md",
-      "excerpt": "Blake's 1794 concept of self-imposed mental chains finds striking relevance in today's digital addictions, algorithmic echo chambers, and passive content consumption.",
-      "tags": ["william blake", "digital culture", "social media", "philosophy", "literature", "technology criticism"]
-    },
-    {
-      "title": "Origins of the Wolfslayer Surname",
-      "date": "2025-02-19",
-      "file": "wolfslayer-surname.md",
-      "excerpt": "The German surname Wolfschläger, meaning 'wolf-slayer,' traces to medieval wolf hunters and transformed to Wolfslayer in America through direct translation.",
-      "tags": ["genealogy", "surname origins", "german history", "immigration", "medieval germany", "westphalia"]
-    }
-  ]
-}
+[
+  {
+    "title": "St. Hippolytus Church in Helden",
+    "date": "2025-03-26",
+    "file": "st-hippolytus-helden.md",
+    "excerpt": "Nearly 1,000 years of St. Hippolytus Church in Helden, from its 11th-century founding by Archbishop Anno II through its enduring role as a spiritual center."
+  },
+  {
+    "title": "Origins of the Wolfslayer Surname",
+    "date": "2025-02-19",
+    "file": "wolfslayer-surname.md",
+    "excerpt": "The German surname Wolfschläger, meaning 'wolf-slayer,' traces to medieval wolf hunters and became Wolfslayer in America through direct translation."
+  }
+]
